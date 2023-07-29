@@ -15,6 +15,8 @@ import pandas as pd
 import json
 import uuid
 from django_ratelimit.decorators import ratelimit
+from dotenv import load_dotenv
+load_dotenv(".env")
 
 
 def api_transformer_list(request):

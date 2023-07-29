@@ -9,9 +9,9 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     ports:
-      - "5432:5432"
+      - "54323:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - pipeline_postgres_data:/var/lib/postgresql/data
   web:
     build: .
     environment:
@@ -21,15 +21,19 @@ services:
       - DB_PASSWORD=postgres
       - DB_HOST=db
       - DB_PORT=5432   
-    container_name: "idp_pipeline"
-    command: python manage.py runserver 0.0.0.0:8000
+    container_name: "opub_pipeline"
+    command: /code/start.sh
     volumes:
       - .:/code
     ports:
-      - "8007:8000"
+      - "8008:8008"
       - "4200:4200"
+      - "15671:15671" 
+      - "15672:15672"
+      - "25671:25671"
+      - "25672:25672"
     depends_on:
       - db
 volumes:
-  postgres_data:
-    name: idp_pipeline_postgres_data
+  pipeline_postgres_data:
+    name: pipeline_postgres_data

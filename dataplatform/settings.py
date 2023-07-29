@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+load_dotenv(".env")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -104,12 +106,12 @@ CACHES = {
 
 DATABASES = {
     "default": {
-        "ENGINE": os.environ.get('DB_ENGINE', "django.db.backends.sqlite3"),
-        "NAME": os.environ.get('DB_NAME', BASE_DIR / "db.sqlite3"),
-        "USER": os.environ.get('DB_USER', "DB_USER"),
-        "PASSWORD": os.environ.get('DB_PASSWORD', 'DB_PASSWORD'),
-        "HOST": os.environ.get('DB_HOST', 'DB_HOST'),
-        "PORT":os.environ.get('DB_PORT', 'DB_PORT'), 
+        "ENGINE": os.getenv('DB_ENGINE', "django.db.backends.sqlite3"),
+        "NAME": os.getenv('DB_NAME', str(BASE_DIR / "db.sqlite3")),
+        "USER": os.getenv('DB_USER', "DB_USER"),
+        "PASSWORD": os.getenv('DB_PASSWORD', 'DB_PASSWORD'),
+        "HOST": os.getenv('DB_HOST', 'DB_HOST'),
+        "PORT":os.getenv('DB_PORT', 'DB_PORT'), 
         
     }
 }
