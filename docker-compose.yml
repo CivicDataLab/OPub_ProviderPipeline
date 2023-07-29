@@ -22,11 +22,11 @@ services:
       - DB_HOST=db
       - DB_PORT=5432   
     container_name: "opub_pipeline"
-    command: /code/start.sh
+    command: bash -c "chmod +x /code/start.sh && /code/start.sh"
     volumes:
       - .:/code
     ports:
-      - "8008:8008"
+      - "8003:8003"
       - "4200:4200"
       - "15671:15671" 
       - "15672:15672"
